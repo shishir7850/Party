@@ -67,26 +67,20 @@ const ViewRoom = ({ history }) => {
   const handleSubmit = (event) => {
     // need to do playlists or track here
     event.preventDefault()
-    var val = "spotify%3Atrack%3A" + url.split('?')[0].split("/")[4];
-    alert(val);
-
+    var val = "spotify:track:" + url.split('?')[0].split("/")[4];
+    alert("uri" + val);
     const id = room.playlistId;
     const token = room.access_token;
 
-    // axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=${val.replace(/:/g ,'%3A')}`, {
-    // axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=spotify%3Atrack%3A3VZQshi4COChhXaz7cLP02`, {
-    axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks`, {
+    axios.post(`https://api.spotify.com/v1/playlists/${id}/tracks?uris=${val}&position=0`, {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
-      },
-      body: {
-        "uris": [val] //.replace(/:/g ,'%3A'),
       }
     }).then(response => {
       history.push('/joinroom');
-    }).catch(error => console.log(error))
+    }).catch(error => alert(error)) 
   }
 
   const getLyrics = (event) => {
@@ -106,7 +100,7 @@ const ViewRoom = ({ history }) => {
       </div>
       <div>
         <h2 style={{color: 'white', display: 'flex', justifyContent: 'center' }}>
-          {song + "by"}{artist}
+          {song + " by "}{artist}
         </h2>
       </div>
     <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>

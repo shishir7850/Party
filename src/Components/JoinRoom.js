@@ -37,6 +37,7 @@ const JoinRoom = ({ history }) => {
           if (doc.data().roomPwd === password) {
             const room = {
               access_token: doc.data().access_token,
+              user: doc.data().userId,
               playlistId: doc.data().playlistId,
               roomId: doc.data().roomId,
               roomPwd: doc.data().roomPwd
