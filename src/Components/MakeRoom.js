@@ -11,7 +11,7 @@ import axios from 'axios';
 
 
 const MakeRoom = ({ history }, props) => {
-    var Playlist;
+    var Playlist = "";
     const { userName, setUserName, token, logUserIn } = useContext(UserContext);
     const { room, dispatchToRoom } = useContext(RoomContext);
     // const [accessToken, setAccessToken] = useState("");
@@ -70,18 +70,15 @@ const MakeRoom = ({ history }, props) => {
                      "public": false
                  }
              }).then(reply => {
-                Playlist = reply.data.playlistId;
-                alert("[][]" + Playlist);
+                const room = {
+                    access_token: token,
+                    userId: id,
+                    playlistId: reply.data.id,
+                    roomId: roomName,
+                    roomPwd: roomPwd
+                }
+                dispatchToRoom({ type: "CREATE", room })
             }).catch(error => console.log(error));
-            const room = {
-                access_token: token,
-                userId: id,
-                playlistId: Playlist,
-                roomId: roomName,
-                roomPwd: roomPwd
-            }
-            
-            dispatchToRoom({ type: "CREATE", room })
             alert('Room created!');
             history.push('/view');
         }).catch(error => console.log(error));
