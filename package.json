@@ -14,7 +14,7 @@
     "react-dom": "^16.10.1",
     "react-ionicons": "^3.0.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.3.0",
+    "react-scripts": "^5.0.1",
     "spotify-web-api-js": "^1.2.0",
     "universal-cookie": "^4.0.2"
   },
